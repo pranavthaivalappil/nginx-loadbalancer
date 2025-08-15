@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-nginx-docker",
+  "version": "1.0.0",
+  "description": "Dockerized Node.js app with Nginx load balancing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["nodejs", "nginx", "docker", "load-balancing"],
+  "author": "Your Name",
+  "license": "MIT"
+}

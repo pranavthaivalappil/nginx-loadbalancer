@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dockerized Node.js with Nginx</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        nav {
+            background: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 280px;
+            max-width: 300px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            background: #5a6fd8;
+        }
+        .response {
+            background: #333;
+            color: #00ff00;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            min-height: 60px;
+            display: none;
+        }
+        .stats {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .stat {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            min-width: 100px;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🐳 Dockerized Node.js</h1>
+        <p>with Nginx Load Balancing & HTTPS</p>
+    </header>
+    
+    <nav>
+        <a href="#demo">Live Demo</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#features">Features</a>
+        <a href="#tech">Tech Stack</a>
+    </nav>
+    
+    <div class="container">
+        <h2 id="demo">🚀 Project Demo</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🔍 Health Check</h3>
+                <p>Monitor multiple Node.js instances</p>
+                <button class="btn" onclick="test('/api/health')">Test Health</button>
+            </div>
+            <div class="card">
+                <h3>📊 Server Info</h3>
+                <p>View load balancing in action</p>
+                <button class="btn" onclick="test('/api/info')">Get Info</button>
+            </div>
+            <div class="card">
+                <h3>⚡ Load Test</h3>
+                <p>Test performance across instances</p>
+                <button class="btn" onclick="loadTest()">Run Test</button>
+            </div>
+        </div>
+
+        <!-- Interactive Response Area (hidden by default) -->
+        <div id="response" class="response">Backend not running. Start with: docker-compose up</div>
+        
+        <!-- Simple Stats (hidden by default) -->
+        <div id="stats" class="stats" style="display: none;">
+            <div class="stat">
+                <div id="requests">0</div>
+                <small>Requests</small>
+            </div>
+            <div class="stat">
+                <div id="instances">0</div>
+                <small>Instances</small>
+            </div>
+        </div>
+
+        <h2 id="architecture">🏗️ Architecture</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🌐 Frontend</h3>
+                <p>Clean HTML/CSS interface with optional JavaScript for live testing</p>
+            </div>
+            <div class="card">
+                <h3>⚙️ Backend</h3>
+                <p>3 Node.js + Express instances running in Docker containers</p>
+            </div>
+            <div class="card">
+                <h3>🔄 Load Balancer</h3>
+                <p>Nginx reverse proxy with SSL termination and health checks</p>
+            </div>
+        </div>
+
+        <h2 id="features">✨ Key Features</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🐳 Containerization</h3>
+                <p>Docker & Docker Compose for consistent deployment</p>
+            </div>
+            <div class="card">
+                <h3>🔒 Security</h3>
+                <p>HTTPS with SSL/TLS encryption and security headers</p>
+            </div>
+            <div class="card">
+                <h3>📈 Scalability</h3>
+                <p>Easy horizontal scaling with load balancing</p>
+            </div>
+        </div>
+
+        <h2 id="tech">🛠️ Technology Stack</h2>
+        <p><strong>Backend:</strong> Node.js, Express.js</p>
+        <p><strong>Load Balancer:</strong> Nginx (Reverse Proxy)</p>
+        <p><strong>Containerization:</strong> Docker, Docker Compose</p>
+        <p><strong>Security:</strong> HTTPS/SSL, Rate Limiting</p>
+        <p><strong>Deployment:</strong> Production-ready configuration</p>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Dockerized Node.js Project. Built with Docker, Node.js, and Nginx.</p>
+        <p>
+            <a href="https://github.com">View on GitHub</a> |
+            <a href="https://docker.com">Learn Docker</a> |
+            <a href="https://nginx.org">Learn Nginx</a>
+        </p>
+    </footer>
+
+    <script>
+        let requests = 0, instances = new Set();
+
+        async function test(endpoint) {
+            const res = document.getElementById('response');
+            res.style.display = 'block';
+            res.innerHTML = '⏳ Testing ' + endpoint + '...';
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                
+                requests++;
+                if (data.instance) instances.add(data.instance);
+                
+                res.innerHTML = `✅ ${endpoint}\n` + JSON.stringify(data, null, 2);
+                updateStats();
+            } catch (error) {
+                res.innerHTML = `❌ ${endpoint}\nError: ${error.message}\n\nStart backend: docker-compose up`;
+            }
+        }
+
+        async function loadTest() {
+            const res = document.getElementById('response');
+            res.style.display = 'block';
+            res.innerHTML = '🚀 Running load test...';
+            
+            try {
+                const promises = Array(5).fill().map(() => fetch('/api/info').then(r => r.json()));
+                const results = await Promise.all(promises);
+                
+                requests += 5;
+                results.forEach(r => r.instance && instances.add(r.instance));
+                
+                const summary = results.reduce((acc, r) => {
+                    acc[r.instance] = (acc[r.instance] || 0) + 1;
+                    return acc;
+                }, {});
+                
+                res.innerHTML = '✅ Load test complete!\n' + 
+                    Object.entries(summary).map(([inst, count]) => `${inst}: ${count} requests`).join('\n');
+                updateStats();
+            } catch (error) {
+                res.innerHTML = `❌ Load test failed: ${error.message}`;
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('stats').style.display = 'flex';
+            document.getElementById('requests').textContent = requests;
+            document.getElementById('instances').textContent = instances.size;
+        }
+    </script>
+</body>
+
+</html>
+</html>
