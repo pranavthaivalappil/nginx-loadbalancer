@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-const appName = process.env.APP_NAME;
+const appName = process.env.APP_NAME || 'local-server';
 
 // Serve static files (images, CSS, JS)
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -34,6 +34,35 @@ app.use('/', (req, res) => {
     console.log(`Request served by ${appName}`);
 });
 
-app.listen(port, () => {
+//Chat application
+const http = require('http');
+const socketIo = require('socket.io');
+
+const server = http.createServer(app);
+const io = socketIo(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
+
+io.on('connection', (socket) => {
+    console.log(`User connected to ${appName}`);
+    
+    socket.on('message', (data) => {
+        io.emit('message', {
+            ...data,
+            server: appName,
+            timestamp: new Date().toISOString()
+        });
+        console.log(`Message handled by ${appName}: ${data.text}`);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`User disconnected from ${appName}`);
+    });
+});
+
+server.listen(port, () => {
     console.log(`${appName} is listening on port ${port}`);
 });
