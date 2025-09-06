@@ -43,7 +43,8 @@ const io = socketIo(server, {
     cors: {
         origin: "*",
         methods: ["GET", "POST"]
-    }
+    },
+    transports: ['websocket', 'polling']
 });
 
 io.on('connection', (socket) => {
@@ -65,4 +66,19 @@ io.on('connection', (socket) => {
 
 server.listen(port, '0.0.0.0', () => {
     console.log(`${appName} is listening on port ${port}`);
+    console.log(`Environment: NODE_ENV=${process.env.NODE_ENV}`);
+    console.log(`Server ready to accept connections`);
+});
+
+server.on('error', (err) => {
+    console.error('Server error:', err);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
 });
