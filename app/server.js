@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const appName = process.env.APP_NAME || 'local-server';
+const appName = process.env.APP_NAME || 'railway-app';
 
 // Serve static files (images, CSS, JS)
 app.use('/images', express.static(path.join(__dirname, 'images')));
