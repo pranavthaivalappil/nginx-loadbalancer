@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: nginx-loadbalancer
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    region: oregon
+    branch: master
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_NAME
+        value: render-app
+    buildCommand: npm install
+    startCommand: npm start

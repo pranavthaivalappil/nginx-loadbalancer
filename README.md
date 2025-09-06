@@ -117,12 +117,30 @@ The application can be easily scaled by:
 
 ## 🚀 Deployment
 
-This project is deployed on Railway with automatic builds from GitHub.
+This project is deployed on Render with automatic builds from GitHub.
 
-### Deploy Your Own
+### Deploy Your Own (FREE Forever!)
+
+#### Option 1: Render (Recommended)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
 1. Fork this repository
-2. Connect to Railway
-3. Deploy with one click!
+2. Connect to [Render](https://render.com)
+3. Create new "Web Service" from GitHub repo
+4. Select your forked repository
+5. Deploy automatically!
+
+#### Option 2: Railway (30-day trial)
+1. Go to [Railway](https://railway.app)
+2. Connect GitHub repository
+3. Deploy with Docker
+
+#### Option 3: Fly.io
+```bash
+# Install Fly CLI and deploy
+flyctl launch
+flyctl deploy
+```
 
 ## 👨‍💻 Author
 
