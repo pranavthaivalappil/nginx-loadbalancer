@@ -1,0 +1,13 @@
+{
+  "name": "nginx-loadbalancer",
+  "version": "1.0.0",
+  "description": "Dockerized Node.js app with Nginx load balancing and real-time dashboard",
+  "main": "app/server.js",
+  "scripts": {
+    "start": "cd app && npm start",
+    "install": "cd app && npm install"
+  },
+  "keywords": ["nodejs", "nginx", "docker", "load-balancing", "monitoring"],
+  "author": "Pranav Vinod Thaivalappil",
+  "license": "MIT"
+}
