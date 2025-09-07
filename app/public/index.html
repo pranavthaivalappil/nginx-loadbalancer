@@ -262,10 +262,10 @@
                 const results = await Promise.all(promises);
                 
                 requests += 5;
-                results.forEach(r => r.instance && instances.add(r.instance));
+                results.forEach(r => r.app && instances.add(r.app));
                 
                 const summary = results.reduce((acc, r) => {
-                    acc[r.instance] = (acc[r.instance] || 0) + 1;
+                    acc[r.app] = (acc[r.app] || 0) + 1;
                     return acc;
                 }, {});
                 
@@ -288,7 +288,13 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         // Chat functionality
-        const socket = io();
+        const socket = io({
+            transports: ['polling', 'websocket'],
+            upgrade: true,
+            rememberUpgrade: false,
+            timeout: 20000,
+            forceNew: false
+        });
         const chatMessages = document.getElementById('chatMessages');
         const messageInput = document.getElementById('messageInput');
 
