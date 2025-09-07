@@ -117,30 +117,28 @@ The application can be easily scaled by:
 
 ## 🚀 Deployment
 
-This project is deployed on Render with automatic builds from GitHub.
+This project is deployed on Vercel with automatic builds from GitHub.
 
 ### Deploy Your Own (FREE Forever!)
 
-#### Option 1: Render (Recommended)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+#### Option 1: Vercel (Recommended)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/pranavthaivalappil/nginx-loadbalancer)
 
 1. Fork this repository
-2. Connect to [Render](https://render.com)
-3. Create new "Web Service" from GitHub repo
-4. Select your forked repository
-5. Deploy automatically!
+2. Connect to [Vercel](https://vercel.com)
+3. Import your GitHub repository
+4. Deploy automatically - Vercel auto-detects Node.js!
 
-#### Option 2: Railway (30-day trial)
+#### Option 2: Render
+1. Go to [Render](https://render.com)
+2. Create new "Web Service" from GitHub repo
+3. Set Environment to "Node" and Root Directory to "app"
+4. Deploy automatically!
+
+#### Option 3: Railway
 1. Go to [Railway](https://railway.app)
 2. Connect GitHub repository
-3. Deploy with Docker
-
-#### Option 3: Fly.io
-```bash
-# Install Fly CLI and deploy
-flyctl launch
-flyctl deploy
-```
+3. Set Root Directory to "app"
 
 ## 👨‍💻 Author
 
