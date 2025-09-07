@@ -14,7 +14,10 @@ app.get('/api/health', (req, res) => {
     res.json({
         status: 'healthy',
         app: appName,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        uptime: process.uptime(),
+        memory: process.memoryUsage(),
+        cpu: process.cpuUsage()
     });
     console.log(`Health check served by ${appName}`);
 });
@@ -23,9 +26,31 @@ app.get('/api/info', (req, res) => {
     res.json({
         message: 'Hello from Node.js server!',
         app: appName,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        version: '1.0.0',
+        environment: process.env.NODE_ENV || 'development',
+        platform: process.platform,
+        nodeVersion: process.version
     });
     console.log(`Info request served by ${appName}`);
+});
+
+// Dashboard route
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+    console.log(`Dashboard accessed by ${appName}`);
+});
+
+// API Stats endpoint
+app.get('/api/stats', (req, res) => {
+    res.json({
+        server: appName,
+        uptime: Math.floor(process.uptime()),
+        memory: process.memoryUsage(),
+        timestamp: new Date().toISOString(),
+        requests: Math.floor(Math.random() * 1000) + 100,
+        connections: Math.floor(Math.random() * 10) + 1
+    });
 });
 
 // Main route
