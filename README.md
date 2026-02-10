@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Nginx Load Balancer
 
 Dockerized Node.js application with Nginx load balancing across multiple instances.
@@ -62,3 +63,10 @@ Self-signed certificates in `nginx/ssl/`. For production, replace with valid cer
 ## License
 
 [MIT License](LICENSE)
+=======
+Production-ready Node.js app with Nginx load balancing and Docker Compose
+Nginx distributes traffic across multiple Node.js instances using least_conn.
+HTTPS enabled with SSL, security headers, and health checks.
+Real-time chat via Socket.io to visualize load distribution.
+Easily scalable, containerized, and deployable on Vercel/Render/Railway.
+>>>>>>> 3e6d1503978cb906e9aeeb0376bf76179e6d8d08
